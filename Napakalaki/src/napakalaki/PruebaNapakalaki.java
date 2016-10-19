@@ -8,7 +8,6 @@ package napakalaki;
 import java.util.ArrayList;
 
 /**
- * HACER !POLIPO!, !YSKDFSGS!, !Robocop!, Tongue, !magaluf! //Monstruos para definir
  * @author emilio
  **/
 public class PruebaNapakalaki {
