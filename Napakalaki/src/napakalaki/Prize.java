@@ -24,7 +24,7 @@ public class Prize {
         return(this.treasures);
     }
     
-    public int getLevel(){
+    public int getLevels(){
         return(this.treasures);
     }
     

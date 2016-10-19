@@ -1,19 +1,71 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package napakalaki;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-/**
- * @author emilio
- **/
 public class PruebaNapakalaki {
+    
+    private static ArrayList<Monster>  misMonster = new ArrayList();
+    
+    public static ArrayList<Monster> monstruosNivelCombSupaeriorA(int level){
+        
+        ArrayList<Monster> resultado = new ArrayList();
+        
+        for(Monster m : misMonster){
+            if(m.getCombatLevel() >= level)
+                resultado.add(m);
+        }
+        
+        return resultado;
+    }
+    
+    public static ArrayList<Monster> soloPierdeNiveles(){
+        
+        ArrayList<Monster> resultado = new ArrayList();
+        
+        for(Monster m : misMonster){
+            
+          int  nHiddenTreasures = m.getBadConsequence().getnHiddenTreasures();
+          int  nVisibleTreasures = m.getBadConsequence().getnVisibleTreasures();
+          int  levels = m.getBadConsequence().getLevels();
+          
+          if((nHiddenTreasures == 0) && (nVisibleTreasures == 0) && (levels >= 1))
+               resultado.add(m);
+        }
+        
+        return resultado;
+    }
+     
+    
+    public static ArrayList<Monster> ganarmasde1(){
+        
+        ArrayList<Monster> resultado = new ArrayList();
+        
+        for(Monster m : misMonster){
+            int level = m.getPrize().getLevels();
+            if(level >1)
+                resultado.add(m);
+        }
+        
+        return resultado;
+    }
+    
+    public static ArrayList<Monster> perderTesoro(TreasureKind treasure){
+        
+        ArrayList<Monster> resultado = new ArrayList();
+        
+        for(Monster m : misMonster){
+            ArrayList<TreasureKind> HiddenTreasure = m.getBadConsequence().getHiddenTreasures();
+            ArrayList<TreasureKind> VisibleTreasure = m.getBadConsequence().getVisibleTreasures();
+        }
+        
+        return resultado;
+    }
+    
+    
+    
     public static void main (String [] args){
-        ArrayList<Monster>  misMonster = new ArrayList();
-
        //Creacion de Demonios de Magaluf
         
         BadConsequence bdmagaluf = new BadConsequence("Te atrapan para llevarte de "
@@ -49,6 +101,29 @@ public class PruebaNapakalaki {
         Prize prizetongue = new Prize(2,1);
         misMonster.add(new Monster("Tongue",19,bdtongue,prizetongue)); 
         
+        BadConsequence badConsequence = new BadConsequence("Pierdes 5 niveles y 3 tesoros visibles", 5, 3, 0);  
+        Prize prize = new Prize(4,2);
+        misMonster.add(new Monster("El rey de rosa", 13, badConsequence, prize));
+
+        
+        badConsequence = new BadConsequence("Te atrapan para llevarte de fiesta" 
+                + " y te dejan caer en mitad del vuelo. Descarta 1 mano visible y 1 mano oculta",0,
+                new ArrayList(Arrays.asList(TreasureKind.ONEHAND)), new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));
+   
+        prize = new Prize(4,1);
+        misMonster.add(new Monster("Ángeles de la noche ibicenca", 14, badConsequence,prize));
+
+        /*
+        while(opcion != 5){
+            system.out.print....
+            
+        
+            Scaner in = new Scanner(System.in);
+            String entrada = in.nextLine();  //Leer desde teclado
+            opcion = Integer.parseInt(entrada);
+        
+            switch....
+        */
         for(Monster m : misMonster){
             System.out.print(m.toString());
         }
