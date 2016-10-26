@@ -5,6 +5,10 @@ require_relative "prize.rb"
 require_relative "bad_consequence"
 
 class PruebaNapakalaki
-  initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures,
-    someSpecificVisibleTreasures, someSpecificHiddenTreasures, death)
+ 
+  
+ 
+    
+
+
 end

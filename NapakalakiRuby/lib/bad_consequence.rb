@@ -5,12 +5,15 @@
 class BadConsequence
   att_reader :text, :levels, :nVisibleTreasures, :nHiddenTreasures, :death
   
-  @text
-  @levels
-  @nVisibleTreasures
-  @nHiddenTreasures
-  @death
-  
+  def initialize(text, levels, nVisible, nHidden, death, specificVisibleTreasures, specificHiddenTreasures)
+		@text = text
+		@levels = levels
+		@nVisibleTreasures = nVisible
+		@nHiddenTreasures = nHidden
+		@death = death
+		@specificHiddenTreasures = specificHiddenTreasures.clone
+		@specificVisibleTreasures =  specificVisibleTreasures.clone
+	end
   
   def to_s
     "Text #{@text} \n Level lost: #{@levels}, nVisibleTreasures: #{@nVisibleTreasures},

@@ -3,6 +3,7 @@ package napakalaki;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class PruebaNapakalaki {
     
@@ -58,6 +59,15 @@ public class PruebaNapakalaki {
         for(Monster m : misMonster){
             ArrayList<TreasureKind> HiddenTreasure = m.getBadConsequence().getHiddenTreasures();
             ArrayList<TreasureKind> VisibleTreasure = m.getBadConsequence().getVisibleTreasures();
+        
+            for(TreasureKind t : HiddenTreasure){
+                if(t == treasure)
+                    resultado.add(m);
+            }
+            for(TreasureKind t : VisibleTreasure){
+                if(t == treasure)
+                    resultado.add(m);
+            }
         }
         
         return resultado;
@@ -113,19 +123,48 @@ public class PruebaNapakalaki {
         prize = new Prize(4,1);
         misMonster.add(new Monster("Ángeles de la noche ibicenca", 14, badConsequence,prize));
 
-        /*
+        
+       int opcion = 0;
+        
         while(opcion != 5){
-            system.out.print....
+            System.out.print("\nElige opcion: \n" +
+            "1. Monstruos con nivel de combate superior a X.\n"
+            + "2. Monstruos con mal rollo que implique solo perdida de nivel\n"
+            + "3. Monstrucos con buen rollo indique una ganancia de niveles superior a 1.\n"
+            + "4. Pierdes un determinado tipo de tesoro visible u oculto.\n"
+            + "5. Salir.\n");
             
-        
-            Scaner in = new Scanner(System.in);
+            Scanner in = new Scanner(System.in);
             String entrada = in.nextLine();  //Leer desde teclado
+           
             opcion = Integer.parseInt(entrada);
-        
-            switch....
-        */
-        for(Monster m : misMonster){
-            System.out.print(m.toString());
-        }
+            ArrayList<Monster> resultado = new ArrayList();
+            
+            switch(opcion) {
+                case 1: 
+                    System.out.print("Nivel de combate minimo:");
+                    entrada = in.nextLine();  //Leer desde teclado
+                    int level = Integer.parseInt(entrada);
+                    resultado = monstruosNivelCombSupaeriorA(level);
+                    break;
+                case 2:
+                    resultado = soloPierdeNiveles();
+                    break;
+                case 3:
+                    resultado = ganarmasde1();
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                    System.out.print("Adios.\n");
+                    break;
+                default: System.out.print("No ha introducido una opcion valida.");
+            }
+
+            for(Monster m : resultado){
+                System.out.print(m.toString());
+            }
+       }
     }
 }
