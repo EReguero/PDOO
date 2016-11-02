@@ -76,6 +76,7 @@ public class PruebaNapakalaki {
     
     
     public static void main (String [] args){
+<<<<<<< HEAD
      
        int opcion = 0;
         
@@ -119,6 +120,44 @@ public class PruebaNapakalaki {
                 System.out.print(m.toString());
             }
        }
+=======
+       //Creacion de Demonios de Magaluf
+        
+        BadConsequence bdmagaluf = new BadConsequence("Te atrapan para llevarte de "
+                + "fiesta y te dejan caer en mitad del vuelo. Descarta una mano "
+                + "visible y otra oculta. ",0,new ArrayList(Arrays.asList(TreasureKind.ONEHAND)), new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));      
+        Prize prizemagaluf = new Prize(4,1);
+        misMonster.add(new Monster("Demonios de Magaluf",2,bdmagaluf,prizemagaluf)); 
+
+        //Creacion de Pollipolipo volante
+        
+        BadConsequence bdpollipolipo = new BadConsequence("Da mucho asquito. Pierdes 3 niveles. ",0,1,1);
+        Prize prizepollipolipo = new Prize(2,1);
+        misMonster.add(new Monster("Pollipólipo volante",3,bdpollipolipo,prizepollipolipo)); 
+
+        
+        //Creacion de YskhtihyssgGoth
+        BadConsequence bdysk = new BadConsequence("No le hace gracia que "+
+                "pronuncien mal su nombre. Estas muerto. ",true);
+        Prize prizeysk = new Prize(2,1);
+        misMonster.add(new Monster("YskhtihyssgGoth",3,bdysk,prizeysk)); 
+        
+        //Creacion de Roboggoth
+        BadConsequence bdrobot = new BadConsequence("La quinta directiva" +
+        " primaria te obliga a perder 2 niveles y" +
+        " un tesoro 2 manos visible. ",2,2,0);
+        Prize prizerobot = new Prize(2,1);
+        misMonster.add(new Monster("Roboggoth",8,bdrobot,prizerobot)); 
+        
+        
+        //Creacion de Tongue
+        BadConsequence bdtongue = new BadConsequence("Menudo susto te llevas. " +
+        "Pierdes 2 niveles y 5 tesoros visibles.",2,5,0);
+        Prize prizetongue = new Prize(2,1);
+        misMonster.add(new Monster("Tongue",19,bdtongue,prizetongue)); 
+        
+
+>>>>>>> origin/master
          //Monstruo  --> El rey de rosa
         
         Prize prizeERDR = new Prize(4, 2);
@@ -151,7 +190,7 @@ public class PruebaNapakalaki {
         Prize prizeDun = new Prize(1, 1);
         BadConsequence badConsequenceDun = new BadConsequence("El primordial bostezo contagioso. "
                 + "Pierdes el calzado visible ", 0, new ArrayList(Arrays.asList(TreasureKind.SHOES)), new ArrayList());
-        misMonster.add(new Monster("Ángeles de la noche ibizenca ", 2, badConsequenceDun, prizeDun));
+        misMonster.add(new Monster("El sopor de Dunwich ", 2, badConsequenceDun, prizeDun));
      
          //Monstruo  -->  El gorrón en el umbral
         
@@ -239,6 +278,7 @@ public class PruebaNapakalaki {
         Prize prizeysk = new Prize(2,1);
         misMonster.add(new Monster("YskhtihyssgGoth",3,bdysk,prizeysk)); 
         
+<<<<<<< HEAD
         //Monstruo --> Roboggoth
         BadConsequence bdrobot = new BadConsequence("La quinta directiva" +
         " primaria te obliga a perder 2 niveles y" +
@@ -256,5 +296,76 @@ public class PruebaNapakalaki {
         BadConsequence badConsequence = new BadConsequence("Pierdes 5 niveles y 3 tesoros visibles", 5, 3, 0);  
         Prize prize = new Prize(4,2);
         misMonster.add(new Monster("El rey de rosa", 13, badConsequence, prize));     
+=======
+        for(Monster m : misMonster){
+            System.out.print(m.toString());
+        }
+        
+                
+       int opcion = 0;
+        
+        while(opcion != 5){
+            System.out.print("\nElige opcion: \n" +
+            "1. Monstruos con nivel de combate superior a X.\n"
+            + "2. Monstruos con mal rollo que implique solo perdida de nivel\n"
+            + "3. Monstrucos con buen rollo indique una ganancia de niveles superior a 1.\n"
+            + "4. Pierdes un determinado tipo de tesoro visible u oculto.\n"
+            + "5. Salir.\n");
+            
+            Scanner in = new Scanner(System.in);
+            String entrada = in.nextLine();  //Leer desde teclado
+           
+            opcion = Integer.parseInt(entrada);
+            ArrayList<Monster> resultado = new ArrayList();
+            
+            switch(opcion) {
+                case 1: 
+                    System.out.print("Nivel de combate minimo:");
+                    entrada = in.nextLine();  //Leer desde teclado
+                    int level = Integer.parseInt(entrada);
+                    resultado = monstruosNivelCombSupaeriorA(level);
+                    break;
+                case 2:
+                    resultado = soloPierdeNiveles();
+                    break;
+                case 3:
+                    resultado = ganarmasde1();
+                    break;
+                case 4:
+                    ArrayList<Monster> resultado1 = perderTesoro(TreasureKind.ARMOR);
+                    ArrayList<Monster> resultado2 = perderTesoro(TreasureKind.ONEHAND);
+                    ArrayList<Monster> resultado3 = perderTesoro(TreasureKind.BOTHHANDS);
+                    ArrayList<Monster> resultado4 = perderTesoro(TreasureKind.HELMET);
+                    ArrayList<Monster> resultado5 = perderTesoro(TreasureKind.SHOES);
+                    for(Monster m : resultado1){
+                        System.out.print(m.toString());
+                    }
+                    for(Monster m : resultado2){
+                        System.out.print(m.toString());
+                    }
+                    for(Monster m : resultado3){
+                     System.out.print(m.toString());
+                       }
+                    for(Monster m : resultado4){
+                        System.out.print(m.toString());
+                    }
+                    for(Monster m : resultado5){
+                        System.out.print(m.toString());
+                    }
+                    
+                    break;
+                case 5:
+                    System.out.print("Adios.\n");
+                    break;
+                default: System.out.print("No ha introducido una opcion valida.");
+            }
+
+            for(Monster m : resultado){
+                System.out.print(m.toString());
+            }
+       }
+        
+       
+>>>>>>> origin/master
     }
 }
