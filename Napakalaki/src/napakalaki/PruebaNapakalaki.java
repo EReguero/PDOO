@@ -80,7 +80,7 @@ public class PruebaNapakalaki {
         
         BadConsequence bdmagaluf = new BadConsequence("Te atrapan para llevarte de "
                 + "fiesta y te dejan caer en mitad del vuelo. Descarta una mano "
-                + "visible y otra oculta. ",0,1,1);      
+                + "visible y otra oculta. ",0,new ArrayList(Arrays.asList(TreasureKind.ONEHAND)), new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));      
         Prize prizemagaluf = new Prize(4,1);
         misMonster.add(new Monster("Demonios de Magaluf",2,bdmagaluf,prizemagaluf)); 
 
