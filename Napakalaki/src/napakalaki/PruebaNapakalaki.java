@@ -76,55 +76,7 @@ public class PruebaNapakalaki {
     
     
     public static void main (String [] args){
-       //Creacion de Demonios de Magaluf
-        
-        BadConsequence bdmagaluf = new BadConsequence("Te atrapan para llevarte de "
-                + "fiesta y te dejan caer en mitad del vuelo. Descarta una mano "
-                + "visible y otra oculta. ",0,1,1);      
-        Prize prizemagaluf = new Prize(4,1);
-        misMonster.add(new Monster("Demonios de Magaluf",2,bdmagaluf,prizemagaluf)); 
-
-        //Creacion de Pollipolipo volante
-        
-        BadConsequence bdpollipolipo = new BadConsequence("Da mucho asquito. Pierdes 3 niveles. ",0,1,1);
-        Prize prizepollipolipo = new Prize(2,1);
-        misMonster.add(new Monster("Pollipólipo volante",3,bdpollipolipo,prizepollipolipo)); 
-
-        
-        //Creacion de YskhtihyssgGoth
-        BadConsequence bdysk = new BadConsequence("No le hace gracia que "+
-                "pronuncien mal su nombre. Estas muerto. ",true);
-        Prize prizeysk = new Prize(2,1);
-        misMonster.add(new Monster("YskhtihyssgGoth",3,bdysk,prizeysk)); 
-        
-        //Creacion de Roboggoth
-        BadConsequence bdrobot = new BadConsequence("La quinta directiva" +
-        " primaria te obliga a perder 2 niveles y" +
-        " un tesoro 2 manos visible. ",2,2,0);
-        Prize prizerobot = new Prize(2,1);
-        misMonster.add(new Monster("Roboggoth",8,bdrobot,prizerobot)); 
-        
-        
-        //Creacion de Tongue
-        BadConsequence bdtongue = new BadConsequence("Menudo susto te llevas. " +
-        "Pierdes 2 niveles y 5 tesoros visibles.",2,5,0);
-        Prize prizetongue = new Prize(2,1);
-        misMonster.add(new Monster("Tongue",19,bdtongue,prizetongue)); 
-        
-<<<<<<< HEAD
-        BadConsequence badConsequence = new BadConsequence("Pierdes 5 niveles y 3 tesoros visibles", 5, 3, 0);  
-        Prize prize = new Prize(4,2);
-        misMonster.add(new Monster("El rey de rosa", 13, badConsequence, prize));
-
-        
-        badConsequence = new BadConsequence("Te atrapan para llevarte de fiesta" 
-                + " y te dejan caer en mitad del vuelo. Descarta 1 mano visible y 1 mano oculta",0,
-                new ArrayList(Arrays.asList(TreasureKind.ONEHAND)), new ArrayList(Arrays.asList(TreasureKind.ONEHAND)));
-   
-        prize = new Prize(4,1);
-        misMonster.add(new Monster("Ángeles de la noche ibicenca", 14, badConsequence,prize));
-
-        
+     
        int opcion = 0;
         
         while(opcion != 5){
@@ -167,7 +119,6 @@ public class PruebaNapakalaki {
                 System.out.print(m.toString());
             }
        }
-=======
          //Monstruo  --> El rey de rosa
         
         Prize prizeERDR = new Prize(4, 2);
@@ -275,11 +226,35 @@ public class PruebaNapakalaki {
                 +"Pierdes 3 niveles y tus tesoros visibles de las manos.", 3, Integer.MAX_VALUE , 0);
         misMonster.add(new Monster("Bicéfalo ", 21, badConsequenceBi, prizeBi));
         
+        //Monstruo --> Pollipolipo volante
+        
+        BadConsequence bdpollipolipo = new BadConsequence("Da mucho asquito. Pierdes 3 niveles. ",0,1,1);
+        Prize prizepollipolipo = new Prize(2,1);
+        misMonster.add(new Monster("Pollipólipo volante",3,bdpollipolipo,prizepollipolipo)); 
+
+        
+        //Monstruo --> YskhtihyssgGoth
+        BadConsequence bdysk = new BadConsequence("No le hace gracia que "+
+                "pronuncien mal su nombre. Estas muerto. ",true);
+        Prize prizeysk = new Prize(2,1);
+        misMonster.add(new Monster("YskhtihyssgGoth",3,bdysk,prizeysk)); 
+        
+        //Monstruo --> Roboggoth
+        BadConsequence bdrobot = new BadConsequence("La quinta directiva" +
+        " primaria te obliga a perder 2 niveles y" +
+        " un tesoro 2 manos visible. ",2,2,0);
+        Prize prizerobot = new Prize(2,1);
+        misMonster.add(new Monster("Roboggoth",8,bdrobot,prizerobot)); 
         
         
-        for(Monster m : misMonster){
-            System.out.print(m.toString());
-        }
->>>>>>> origin/master
+        //Monstruo --> Tongue
+        BadConsequence bdtongue = new BadConsequence("Menudo susto te llevas. " +
+        "Pierdes 2 niveles y 5 tesoros visibles.",2,5,0);
+        Prize prizetongue = new Prize(2,1);
+        misMonster.add(new Monster("Tongue",19,bdtongue,prizetongue)); 
+        
+        BadConsequence badConsequence = new BadConsequence("Pierdes 5 niveles y 3 tesoros visibles", 5, 3, 0);  
+        Prize prize = new Prize(4,2);
+        misMonster.add(new Monster("El rey de rosa", 13, badConsequence, prize));     
     }
 }

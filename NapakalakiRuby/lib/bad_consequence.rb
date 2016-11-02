@@ -3,7 +3,8 @@
 # and open the template in the editor.
 
 class BadConsequence
-  att_reader :text, :levels, :nVisibleTreasures, :nHiddenTreasures, :death
+  attr_reader :text, :levels, :nVisibleTreasures, :nHiddenTreasures, :death
+  private_class_method :new
   
   def initialize(text, levels, nVisible, nHidden, death, specificVisibleTreasures, specificHiddenTreasures)
 		@text = text
@@ -11,9 +12,21 @@ class BadConsequence
 		@nVisibleTreasures = nVisible
 		@nHiddenTreasures = nHidden
 		@death = death
-		@specificHiddenTreasures = specificHiddenTreasures.clone
-		@specificVisibleTreasures =  specificVisibleTreasures.clone
+		@specificHiddenTreasures = specificHiddenTreasures
+		@specificVisibleTreasures =  specificVisibleTreasures
 	end
+  def self.newLevelNumberOfTreasures (aText, someLevels, someVisibleTreasures, someHiddenTreasures)
+   new(aText, someLevels, someVisibleTreasures, someHiddenTreasures, [] , [],false)
+  end
+  
+  def self.newLevelSpecificTreasures (aText, someLevels,someSpecificVisibleTreasures, someSpecificHiddenTreasures)
+    new(aText, someLevels,0,0,someSpecificVisibleTreasures, someSpecificHiddenTreasures,false)
+  end
+  
+  def self.newDeath (aText)
+    new(aText,0,0,0,[],[],true)
+  end
+  
   
   def to_s
     "Text #{@text} \n Level lost: #{@levels}, nVisibleTreasures: #{@nVisibleTreasures},
