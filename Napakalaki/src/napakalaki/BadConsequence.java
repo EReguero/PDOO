@@ -60,11 +60,13 @@ public class BadConsequence {
     }
     
     public void substractVisibleTreasure(Treasure t){
-        
+        TreasureKind type = t.getType();
+        this.specificVisibleTreasures.remove(type);
     }
     
     public void substractHiddenTreasure(Treasure t){
-        
+        TreasureKind type = t.getType();
+        this.specificHiddenTreasures.remove(type);
     }
     
      public BadConsequence(String text, int levels, int nVisible, int nHidden){
@@ -78,20 +80,65 @@ public class BadConsequence {
     public BadConsequence(String text, boolean death){
         this.text = text;
         this.death = death;
+        this.levels = Player.MAXLEVEL;
+        this.nHiddenTreasures = MAXTREASURES;
+        this.nVisibleTreasures = MAXTREASURES;
     }
     
     public BadConsequence(String text, int levels, ArrayList<TreasureKind> tVisible, ArrayList<TreasureKind> tHidden){
         this.text = text;
         this.levels = levels;
+        this.nHiddenTreasures = 0;
+        this.nVisibleTreasures = 0;
         this.specificHiddenTreasures = tHidden;
         this.specificVisibleTreasures = tVisible;
     }
     
     
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v, ArrayList<Treasure> h){
+        BadConsequence bc;
         
-    }
+        //Tipo numerico
+        if(this.nHiddenTreasures > 0 && this.nVisibleTreasures > 0){
+           int nHidden = h.size();
+           int nVisible = v.size();
+           
+           nHidden = Integer.min(nHidden, nHiddenTreasures);
+           nVisible = Integer.min(nVisible, nVisibleTreasures);
+           
+           bc = new BadConsequence(text,levels,nHidden,nVisible);
+           
+       }
+       else{ 
+            ArrayList<TreasureKind> specificVTreasures = new ArrayList();
+            ArrayList<TreasureKind> specificHTreasures = new ArrayList();
+            
+            for(Treasure t: v){
+              specificVTreasures.add(t.getType());
+            }
+          
+            for(Treasure t : h){
+                specificHTreasures.add(t.getType());
+            }
+            
+            specificVTreasures = commonTreasures(this.specificVisibleTreasures,specificVTreasures);
+            specificHTreasures = commonTreasures(this.specificHiddenTreasures,specificHTreasures);
+           
+            bc = new BadConsequence(text,levels,specificVTreasures,specificHTreasures);
+       }
+        return bc;  
+    }   
     
+    private ArrayList<TreasureKind> commonTreasures(ArrayList<TreasureKind> bc, ArrayList<TreasureKind> player){
+        
+        ArrayList<TreasureKind> result = new ArrayList();
+        
+        for(TreasureKind type : this.specificVisibleTreasures){
+           
+        }
+        
+        return result;
+    }
     
     @Override
     public String toString(){

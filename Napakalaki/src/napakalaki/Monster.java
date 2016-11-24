@@ -36,7 +36,7 @@ public class Monster {
         return bc;
     }
     
-    public int getlevelsGained(){
+    public int getLevelsGained(){
         return prize.getLevel();
     }
     

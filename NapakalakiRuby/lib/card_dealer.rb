@@ -101,7 +101,7 @@ class CardDealer
     @unused_monsters << Monster.new("Ángeles de la noche ibizenca ", 14, bc, prize)
 
     #Creación de  "El gorrón en el umbral"
-    bc = BadConsequence.new_level_of_treasures("Pierdes todos tus tesoros visibles. ", 0,10, 0)
+    bc = BadConsequence.new_level_of_treasures("Pierdes todos tus tesoros visibles. ", 0,@@MAXTREASURES, 0)
     prize= Prize.new(3, 1)
     @unused_monsters << Monster.new("El gorrón en el umbral.", 13, bc, prize)
 
@@ -189,7 +189,7 @@ class CardDealer
     #Creación de "Bícefalo"
     t_visible = [TreasureKind::BOTHHANDS]
     t_hidden = []
-    bc = BadConsequence.new_level_of_treasures("Te faltan manos para tanta cabeza. " + "Pierdes 3 niveles y tus tesoros visibles de las manos.", 3,10, 0)
+    bc = BadConsequence.new_level_of_treasures("Te faltan manos para tanta cabeza. " + "Pierdes 3 niveles y tus tesoros visibles de las manos.", 3,@@MAXTREASURES, 0)
     prize = Prize.new(2, 1)
     @unused_monsters << Monster.new("Bicéfalo ",21,bc, prize)
  end
