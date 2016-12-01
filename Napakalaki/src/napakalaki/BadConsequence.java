@@ -129,12 +129,17 @@ public class BadConsequence {
         return bc;  
     }   
     
-    private ArrayList<TreasureKind> commonTreasures(ArrayList<TreasureKind> bc, ArrayList<TreasureKind> player){
+    private ArrayList<TreasureKind> commonTreasures(ArrayList<TreasureKind> bc, ArrayList<TreasureKind> playerTK){
         
         ArrayList<TreasureKind> result = new ArrayList();
+        ArrayList<TreasureKind> copia_playerTK = playerTK;
         
-        for(TreasureKind type : this.specificVisibleTreasures){
-           
+        for(TreasureKind type : bc){
+            int posicion = copia_playerTK.indexOf(type);
+            
+            if(posicion > 0){
+                result.add(copia_playerTK.remove(posicion));
+            }        
         }
         
         return result;
