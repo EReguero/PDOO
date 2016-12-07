@@ -20,6 +20,10 @@ class Napakalaki
   def getCurrentPlayer
     @currentPlayer
   end
+  
+  def getCurrentMonster
+    @currentMonster
+  end
  
   def developCombat()
     combat_result = @currentPlayer.combat(@currentMonster)
@@ -42,9 +46,12 @@ class Napakalaki
     end
   end
   
-  def make_treasures_visible(treasures)
-    treasures.each do |treasure|
-      @currentPlayer.makeTreasureVisible
+  def makeTreasuresVisible(treasures)
+    i = 0
+    while(i < treasures.size)
+      t = treasures[i]
+      @currentPlayer.makeTreasure_Visible(t)
+      i = i +1  
     end
   end
   
@@ -125,5 +132,7 @@ class Napakalaki
       player.setEnemy(@players[n])
     end
   end
+  
+   
   
 end

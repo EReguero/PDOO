@@ -22,10 +22,12 @@ class Player
     @pendingBadConsequence = nil
   end
   
- 
+  def to_s
+    "#{@name}, Nivel: #{@level}"
+  end
   
   def combat(monster)
-    my_level = get_combat_level
+    my_level = getCombatLevel
     monster_level = monster.getCombatLevel
     
     if(!@canISteal)
@@ -51,7 +53,7 @@ class Player
     combat_result
   end
   
-  def makeTreasureVisible (treasure)
+  def makeTreasureVisible(treasure)
     can_i = canMakeTreasureVisible(treasure)
     
     if(can_i)
@@ -167,8 +169,8 @@ class Player
   end
   
   def applyBadConsequence(m)
-    bad_consequence = m.get_bad_consequence();
-    n_levels = bad_consequence.get_levels();
+    bad_consequence = m.getBadConsequence();
+    n_levels = bad_consequence.getLevels();
     decrementLevels(n_levels);
     pending_bad = badConsequence.adjustToFitTreasureLists(visibleTreasures,hiddenTreasures);
     @pendingBadConsequence = pending_bad;
@@ -176,8 +178,8 @@ class Player
   
  
   
-  def canMakeTreasureVisible(t)
-    type = t.get_type
+  def canMakeTreasureVisible(treasure)
+    type = treasure.type
     can_make_visible = true
         
       case type 
@@ -247,4 +249,5 @@ class Player
     combat_level
   end
   
+ 
 end
