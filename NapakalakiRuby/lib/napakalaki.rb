@@ -1,46 +1,76 @@
 #encoding: utf-8
 #Autor: Dunia Rodríguez y Emilio Reguero
-require_relative "player.rb"
+require_relative 'player'
+require_relative 'card_dealer'
+require_relative 'monster'
 
 class Napakalaki
   
   include Singleton 
   
-  attr_reader :current_player, :current_monster, :dealer, :players
+  attr_reader :currentPlayer, :currentMonster, :dealer, :players
   
   def initialize
     @players = Array.new
-    @current_monster = nil
-    @current_player = nil
+    @currentMonster = nil
+    @currentPlayer = nil
     @dealer = CardDealer.instance
   end
   
+  def getCurrentPlayer
+    @currentPlayer
+  end
  
-  def develop_combat()
+  def developCombat()
+    combat_result = @currentPlayer.combat(@currentMonster)
+    @dealer.giveMonsterBack(@currentMonster)
     
+    combat_result
   end
   
-  def discard_visible_treasures()
-    
+  def discardVisibleTreasures(treasures)
+    treasures.each do treasure
+      @currentPlayer.discardVisibleTreasure(treasure)
+      @dealer.giveTreasureBackack(treasure)
+    end
   end
   
-  def discard_hidden_treasures()
-    
+  def discardHiddenTreasures(treasures)
+     treasures.each do treasure
+      @currentPlayer.discardHiddenTreasure(treasure)
+      @dealer.giveTreasureBackack(treasure)
+    end
   end
   
-  def make_treasures_visible()
-    
+  def make_treasures_visible(treasures)
+    treasures.each do |treasure|
+      @currentPlayer.makeTreasureVisible
+    end
   end
   
-  def init_game()
-    
+  def initGame(players)
+   initPlayers(players)
+   setEnemies
+   dealer.initCards
+   nextTurn
   end
   
-  def next_turn()
+  def nextTurn()
+    state_ok = nextTurnIsAllowed
     
+    if state_ok 
+      @currentMonster = dealer.nextMonster
+      @currentPlayer = nextPlayer
+      dead = currentPlayer.dead
+      if dead
+        @currentPlayer.initTreasures
+      end
+    end
+    
+    state_ok
   end
   
-  def end_of_game(result)
+  def endOfGame(result)
     win_game = false
     if(result == CombatResult::WINGAME)
       win_game = true
@@ -52,38 +82,38 @@ class Napakalaki
   
   private #A partir de aqui todos los metodos privados
   
-  def init_players(names)
+  def initPlayers(names)
     names.each do |name|
       @players << Player.new(name)
     end
   end
   
-  def next_player()
+  def nextPlayer()
     total_players = @players.length
     
-    if(@current_player == nil) then
+    if(@currentPlayer == nil) then
       n = rand(total_players)
     else
-      n = (@players.index(@current_player))+1
+      n = (@players.index(@currentPlayer))+1
       n = n % total_players;
     end
     
     next_player = @players.at(n)
-    @current_player = next_player
+    @currentPlayer = next_player
     
-    @current_player
+    @currentPlayer
   end
   
-  def next_turn_is_allowed()
+  def nextTurnIsAllowed()
     allowed = false
-    if(@current_player == nil || @current_player.valid_state())
+    if(@currentPlayer == nil || @currentPlayer.validState())
       allowed = true
     end
     
     allowed
   end
   
-  def set_enemies()
+  def setEnemies()
     pos = 0
     @players.each do |player|
      
@@ -92,7 +122,7 @@ class Napakalaki
          n = rand(@players.length)
       end
       
-      player.set_enemy(@players[n])
+      player.setEnemy(@players[n])
     end
   end
   

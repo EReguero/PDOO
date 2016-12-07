@@ -44,11 +44,11 @@ public class Player {
         return (level+bonus);
     }
     
-    private void incrementLevel(int i){
+    private void incrementLevels(int i){
         this.level = level + i;
     }
     
-    private void decrementLevel(int i){
+    private void decrementLevels(int i){
         this.level = level - i;
     }
     
@@ -59,7 +59,7 @@ public class Player {
     private void applyPrize(Monster m){
         
         int nLevels = m.getLevelsGained();
-        this.incrementLevel(nLevels);
+        this.incrementLevels(nLevels);
         
         int nTreasures = m.getTreasuresGained();
         if(nTreasures > 0){
@@ -71,10 +71,10 @@ public class Player {
         }
     }
     
-    private void applyBadConsequence(Monster m){ //Repasar
+    private void applyBadConsequence(Monster m){
         BadConsequence badConsequence = m.getBadConsequence();
         int nLevels = badConsequence.getLevels();
-        this.decrementLevel(nLevels);
+        this.decrementLevels(nLevels);
         BadConsequence pendingBad ;
         pendingBad = badConsequence.adjustToFitTreasureLists(visibleTreasures,hiddenTreasures);
         this.setPendingBadConsequence(pendingBad);
@@ -173,14 +173,14 @@ public class Player {
     
     public void discardVisibleTreasure(Treasure t){
         this.visibleTreasures.remove(t);
-        if(this.pendingBadConsequence == null || pendingBadConsequence.IsEmpty())
+        if(this.pendingBadConsequence != null || !pendingBadConsequence.IsEmpty())
             this.pendingBadConsequence.substractVisibleTreasure(t);
         this.dieIfNoTreasures();
     }
     
     public void discardHiddenTreasure(Treasure t){
         this.hiddenTreasures.remove(t);
-        if(this.pendingBadConsequence == null || pendingBadConsequence.IsEmpty())
+        if(this.pendingBadConsequence != null || !pendingBadConsequence.IsEmpty())
             this.pendingBadConsequence.substractHiddenTreasure(t);
         this.dieIfNoTreasures();
     }
@@ -281,7 +281,7 @@ public class Player {
     
      @Override
     public String toString(){
-        return (name + ", Nivel: "+ levelJu);
+        return (name + ", Nivel: "+ level);
     }
 }
 

@@ -6,7 +6,8 @@ class Dice
   include Singleton
   
   def next_number()
-    n = rand(5)+1
+    n = 1 + rand(6)
+    n
   end
   
 end

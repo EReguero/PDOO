@@ -5,8 +5,9 @@ require_relative "prize.rb"
 require_relative "bad_consequence.rb"
 
 class Monster
-  attr_reader :name, :combatLevel, :prize, :bc
+  attr_reader :name, :combatLevel, :prize, :bc, :MAXTREASURES
   
+  @@MAXTREASURES = 10 
   def initialize(name, level, prize, bc)
     @name = name
     @combatLevel = level
@@ -14,11 +15,11 @@ class Monster
     @bc = bc
   end
   
-  def get_levels_gained
+  def getLevelsGained
     @prize.level
   end
   
-  def get_treasures_gained
+  def getTreasuresGained
     @prize.treasures
   end
   
