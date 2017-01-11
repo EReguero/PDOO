@@ -1,17 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* PDOO Practicas - Napakalaki Java
+* @author Emilio Reguero y Dunia Rodríguez 
+*/
 package napakalaki;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author emilio
- */
 public class CultistPlayer extends Player {
     
     private static int totalCultistPlayers = 0;

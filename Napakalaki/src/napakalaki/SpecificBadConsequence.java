@@ -1,16 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* PDOO Practicas - Napakalaki Java
+* @author Emilio Reguero y Dunia Rodríguez 
+*/
 package napakalaki;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author emilio
- */
+
 public class SpecificBadConsequence extends BadConsequence {
     private ArrayList<TreasureKind> specificVisibleTreasures = new ArrayList();
     private ArrayList<TreasureKind> specificHiddenTreasures = new ArrayList();
