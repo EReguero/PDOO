@@ -2,10 +2,17 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 module NapakalakiGame
-module CombatResult
-    WINGAME = :wingame
-    WIN = :win
-    LOSE = :lose
-    LOSEANDCONVERT = :loseandconvert
+class Cultist
+
+     attr_reader :name, :gainedLevels
+  
+  def initialize(nam, gainedlevels)
+    @name = nam
+    @gainedLevels = gainedlevels
+  end
+  
+  def getGainedLevels
+    @gainedLevels
+  end
 end
 end
