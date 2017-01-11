@@ -19,25 +19,42 @@ public class Player {
     private ArrayList<Treasure> hiddenTreasures = new ArrayList();
     private ArrayList<Treasure> visibleTreasures = new ArrayList();
     private BadConsequence pendingBadConsequence;
-    private Player enemy;
+    protected Player enemy;
     
-    
+    //Constructor
     public Player(String name){
         this.name = name;
         this.level = 1;
+    }
+    
+    //Constructor de Copia
+    public Player(Player p){
+        this.name = p.getName();
+        this.level = p.getLevels();
+        this.dead = p.isDead();
+        this.canISteal = p.canISteal();
+        this.enemy = p.enemy;
+        this.visibleTreasures = p.getVisibleTreasures();
+        this.hiddenTreasures = p.getHiddenTreasures();
+        this.setPendingBadConsequence(p.getPendingBadConsequence());
+        
     }
     
     public String getName(){    
         return name;
     }
     
+    public BadConsequence getPendingBadConsequence(){
+        return this.pendingBadConsequence;
+    }
     private void bringToLife(){
         dead = false;
+        level = 1;
     }
     
-    private int getCombatLevel(){
+    protected int getCombatLevel(){
         
-        int bonus = 0;
+        int bonus = this.level;
         for(Treasure t : visibleTreasures)
            bonus = bonus + t.getBonus();
             
@@ -157,7 +174,10 @@ public class Player {
         }
         else{
             this.applyBadConsequence(m);
-            combatResult = CombatResult.LOSE;
+            if(shouldConvert())
+                combatResult = CombatResult.LOSEANDCONVERT;
+            else
+                combatResult = CombatResult.LOSE;
         }
         
         return combatResult;
@@ -173,14 +193,14 @@ public class Player {
     
     public void discardVisibleTreasure(Treasure t){
         this.visibleTreasures.remove(t);
-        if(this.pendingBadConsequence != null || !pendingBadConsequence.IsEmpty())
+        if(this.pendingBadConsequence != null || !pendingBadConsequence.isEmpty())
             this.pendingBadConsequence.substractVisibleTreasure(t);
         this.dieIfNoTreasures();
     }
     
     public void discardHiddenTreasure(Treasure t){
         this.hiddenTreasures.remove(t);
-        if(this.pendingBadConsequence != null || !pendingBadConsequence.IsEmpty())
+        if(this.pendingBadConsequence != null || !pendingBadConsequence.isEmpty())
             this.pendingBadConsequence.substractHiddenTreasure(t);
         this.dieIfNoTreasures();
     }
@@ -188,8 +208,8 @@ public class Player {
     public boolean validState(){
         
         boolean state = false;
-        if(this.pendingBadConsequence == null || pendingBadConsequence.IsEmpty() 
-                && hiddenTreasures.size() <= 4)
+        if(this.pendingBadConsequence == null || pendingBadConsequence.isEmpty() 
+               && hiddenTreasures.size() <= 4)
             state = true;
         return state;
     }
@@ -219,6 +239,13 @@ public class Player {
         return this.level;
     }
     
+    protected Player getEnemy(){
+        return this.enemy;
+    }
+    
+    protected int getOpponentLevel(Monster m){
+        return m.getCombatLevel();
+    } 
     public Treasure stealTreasure(){
         
         Treasure t = null;
@@ -241,7 +268,7 @@ public class Player {
         this.enemy = enemy;
     }
     
-    private Treasure giveMeATreasure(){
+    public Treasure giveMeATreasure(){
         Random rand = new Random();
         int n = rand.nextInt(hiddenTreasures.size());
         Treasure t = hiddenTreasures.get(n); 
@@ -253,7 +280,8 @@ public class Player {
     public boolean canISteal(){
         return this.canISteal;
     }
-    private boolean canYouGiveMeATreasure(){
+    
+    protected boolean canYouGiveMeATreasure(){
         boolean canSteal = true;
         if(this.hiddenTreasures.isEmpty())
             canSteal = false;
@@ -261,6 +289,16 @@ public class Player {
         return canSteal;
     }
     
+    protected boolean shouldConvert(){
+        Dice dice = Dice.getInstance();
+        boolean shouldConvert = false;
+        int n = dice.nextNumber();
+        
+        if(n == 6)
+            shouldConvert = true;
+        
+        return shouldConvert;
+    }
     private void haveStolen(){
         this.canISteal = false;
     }

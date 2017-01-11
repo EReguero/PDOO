@@ -69,10 +69,31 @@ public class Napakalaki {
         return instance;
     }
     
-    public CombatResult developCombat(){  //REPASAR
+    public CombatResult developCombat(){ 
        CombatResult combatResult;
        combatResult = this.currentPlayer.combat(currentMonster);
        dealer.giveMonsterBack(currentMonster);
+       if(combatResult == CombatResult.LOSEANDCONVERT){
+           CardDealer cd = CardDealer.getInstance();
+           Cultist c = cd.nextCultist();
+           CultistPlayer cp = new CultistPlayer(currentPlayer,c);
+           
+           
+           int pos = players.indexOf(currentPlayer);
+           players.add(pos,cp);
+           players.remove(pos+1);
+           
+           for(Player player : players){
+               if(player != cp){
+                   if(player.enemy == currentPlayer)
+                       player.enemy = cp;
+               }
+           }
+           
+           currentPlayer = cp;
+       }
+        
+       
        return combatResult;
     }
     
