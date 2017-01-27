@@ -65,12 +65,12 @@ public class NumericBadConsequence extends BadConsequence{
    
     
     @Override
-    public String toString()
-    {   
-        if(nVisibleTreasures == 0 && nHiddenTreasures == 0 && levels == 0)
-            return "No hay  mal rollo pendiente.";
+    public String toString(){
+        String response = "";
         
-        return "Debes eliminar: nVisibleTreasures: " + nVisibleTreasures 
-                + " y nHiddenTreasures" + nHiddenTreasures;
+        if(nVisibleTreasures > 0 || nHiddenTreasures > 0)
+            response = "Pierdes: Tesoros Visibles: "+nVisibleTreasures+", Tesoros Ocultos: "+nHiddenTreasures;
+        
+        return response;
     }
 }

@@ -72,21 +72,25 @@ public class SpecificBadConsequence extends BadConsequence {
     }
     
     @Override
-    public String toString()
-    {   
-        String out = "";
-       
-        if (!specificVisibleTreasures.isEmpty()){
-        out = "specificVisibleTreasures: ";
-         for (int i = 0; i < specificVisibleTreasures.size(); i++)
-                out += specificVisibleTreasures.get(i) + " ";
-        }
-        if (!specificHiddenTreasures.isEmpty()){
-            out = "\nspecificHiddenTreasures: ";
-             for (int i = 0; i < specificHiddenTreasures.size(); i++)
-                    out += specificHiddenTreasures.get(i) + " ";    
-       }  
+    public String toString(){
         
-       return out;
+        String response = "";
+        if(!specificVisibleTreasures.isEmpty() || specificHiddenTreasures.isEmpty())
+            response = "Pierdes: ";
+        
+        if (!specificVisibleTreasures.isEmpty()){
+            response += " Tesoros visibles que pierdes: ";
+            for (TreasureKind specificVisibleTreasure : specificVisibleTreasures) {
+                response += specificVisibleTreasure + " ";
+            }
+        }
+
+        if (!specificHiddenTreasures.isEmpty()){
+            response += ", Tesoros ocultos que pierdes: ";
+            for (TreasureKind specificHiddenTreasure : specificHiddenTreasures) {
+                response += specificHiddenTreasure + " ";
+            }
+        }
+        return response;
     }
 }
